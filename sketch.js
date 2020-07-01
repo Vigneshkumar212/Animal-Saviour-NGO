@@ -14,7 +14,7 @@ var i = 1;
 var z = "not done"
 var upload_img 
 var type = "png"
-var taketask
+var taketask,assign_img
 var latitude,longitude
 var clickHere
 var img_y,img_x,img_s
@@ -32,6 +32,7 @@ function preload() {
   button_img = loadImage ("dash opt.png");
   background_img = loadImage ("dashboad.png");
   taketask = loadImage("db2.png");
+  assign_img = loadImage("db1.png");
   clickHere = loadImage("click here button.png");
   assigned_img = loadImage("assigned.png");
   assigned_s_img = loadImage("assigned_s.png")
@@ -137,8 +138,8 @@ function mousePressed(){
   }
 
   // to open the map when the map-button is pressed
-  if (mouseX > 125&&mouseY>50&&mouseX<125+53&&mouseY<50+23&& appState === "show"){    
-    window.open("https://vigneshkumar212.github.io/Map/map.html")
+  if (mouseX > 125&&mouseY>50&&mouseX<125+53&&mouseY<50+23&& (appState === "show"|| appState === "assigned")){    
+    window.open('https://vigneshkumar212.github.io/Map/map.html')
   }
 
   // to change the state when assigned by you button is pressed
@@ -218,7 +219,7 @@ function Assigned(){
   }
 
   //changing the background
-  background_img = taketask;
+  background_img = assign_img;
 
   // changing the text color
   fill("black")
@@ -249,6 +250,18 @@ function Assigned(){
       z = "not done"
     }
   })
+  
+  // to give the pop-up effect when the mouse is over the button. 
+  if (mouseX > 125&&mouseY>50&&mouseX<125+53&&mouseY<50+23&& appState === "assigned"){
+    txt_y = 50+4;
+    txt_x = 125+1.5;
+    image(clickHere ,txt_x ,txt_y,50,20)
+  }else if (appState === "show"){
+    // else to push back the button
+    txt_y = 53;
+    txt_x = 125;
+    image(clickHere ,txt_x ,txt_y,53,23)
+  };
 
   // to show the image only when the image is got
   if (image1 !== "not got" && image2 !== "not got"){
