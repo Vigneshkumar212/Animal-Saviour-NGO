@@ -256,7 +256,7 @@ function Assigned(){
     txt_y = 50+4;
     txt_x = 125+1.5;
     image(clickHere ,txt_x ,txt_y,50,20)
-  }else if (appState === "show"){
+  }else if (appState === "assigned"){
     // else to push back the button
     txt_y = 53;
     txt_x = 125;
