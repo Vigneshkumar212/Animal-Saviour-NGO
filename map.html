@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <body>
+      <script>//the files requried for firebse</script>
+      <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
+  
+      <script>
+        var i = 1
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyDJtLUgvZneUzwFzZn3PO_IA6L3mCsbVYw",
+          authDomain: "animal-saviour.firebaseapp.com",
+          databaseURL: "https://animal-saviour.firebaseio.com",
+          projectId: "animal-saviour",
+          storageBucket: "animal-saviour.appspot.com",
+          messagingSenderId: "485260431878",
+          appId: "1:485260431878:web:2ac694384fb6d0ce7ea987"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+      </script>
+
+      <script>   
+        //vars
+        var longitude = "",latitude = ""
+        var database;
+        //initializeing firebase
+        database = firebase.database()
+      </script>
+
+      <style>
+        #map {
+          height: 100%;
+        }
+        html, body {
+          height: 78.50%;
+          width: 43%;
+          margin: 0;
+          padding: 0;
+        }
+      </style>
+        
+      <div id="map"></div>
+      
+      <script>var map;</script>
+
+    </body>
+  </html>
+</head>
+
+<body>
+  <script>
+    function initMap() {
+      if (longitude !== ""){
+        window.console.log("hi")
+        var uluru = {lat: latitude, lng: longitude};
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: uluru,
+          zoom: 15
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    }
+  </script>
+    
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3fk6jpchH9ui5hsV11woxwFt7nP38Tho&callback=initMap">
+  </script>
+
+  <script src="sketch.js" type="text/javascript"></script>
+  <script>
+    cords();
+    function cords(){
+      var path = "ngo submitions/"+ i + "/longitude"
+    var ngoRef = database.ref(path);
+    ngoRef.on("value", (data) => {
+      longitude = data.val();
+    }); 
+
+    var path = "ngo submitions/"+ i + "/latitude"
+    var ngoRef = database.ref(path);
+    ngoRef.on("value", (data) => {
+      latitude = data.val();
+    }); 
+    
+    var ngoRef = database.ref('ngo_count');
+    ngoRef.on("value", (data) => {
+      got_submittedno = data.val();
+    }); 
+  }
+    
+  var state
+  </script>
+  <center>
+    <h3>To See The Map Pls CLick The Button</h3>
+    <h3>For Next Map Click The Next</h3>
+    <button  onclick  = initMap(); >Map</button>
+    <button onclick  = call(); >Next</button>
+  </center>
+  
+  <script>
+    function call(){
+      if (i<got_submittedno){
+        i+=1
+      }
+      var path = "ngo submitions/"+ i + "/longitude"
+      
+      var ngoRef = database.ref(path);
+      ngoRef.on("value", (data) => {
+        longitude = data.val();
+      }); 
+
+      var path = "ngo submitions/"+ i + "/latitude"
+      var ngoRef = database.ref(path);
+      ngoRef.on("value", (data) => {
+        latitude = data.val();
+      });
+
+      initMap();
+
+    }
+  </script>
+</body>
