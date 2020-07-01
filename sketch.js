@@ -138,7 +138,7 @@ function mousePressed(){
 
   // to open the map when the map-button is pressed
   if (mouseX > 125&&mouseY>50&&mouseX<125+53&&mouseY<50+23&& appState === "show"){    
-    window.open("https://vigneshkumar212.github.io/Map/")
+    window.open("https://vigneshkumar212.github.io/Map/map.html")
   }
 
   // to change the state when assigned by you button is pressed
