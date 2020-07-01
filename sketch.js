@@ -64,7 +64,7 @@ function setup() {
 
   // if the got storage is null. changing the var to ""
   if (assigned_no === null) {
-    assigned_no = '';
+    assigned_no = [];
   }
 }
 
